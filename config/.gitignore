@@ -8,3 +8,8 @@ wheels/
 
 # Virtual environments
 .venv
+.gitignor
+.python-version
+.tempCodeRunnerFile.py
+
+tempCodeRunnerFile.py
