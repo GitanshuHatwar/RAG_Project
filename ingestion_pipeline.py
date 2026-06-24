@@ -65,6 +65,47 @@ def split_documents(documents, chunk_size=800, chunk_overlap=0):
     return chunks
 
 
+# def create_vector_store(chunks, persist_directory="db/chroma_db"):
+#     print("Vectorinzing the Chunks")
+
+#     embedding_model = OpenAIEmbeddings(model="text-embedding-3-small")
+
+#     print("--Creating vector store ---")
+#     vectorstore = Chroma.from_documents(
+#         documents = chunks,
+#         embedding = embedding_model,
+#         persist_directory = persist_directory,
+#         collection_metadata = {"hnsw:space":"cosine"}
+#     )
+
+#     print("---Finished creating vector store ---")
+
+#     print(f"Vector store created and saved to {persist_directory}")
+#     return vectorstore
+
+
+def create_vector_store(chunks, persist_directory="db/chroma_db"):
+    print("Vectorizing the chunks using Ollama...")
+
+    embedding_model = OllamaEmbeddings(
+        model="nomic-embed-text:latest"
+    )
+
+    print("--- Creating vector store ---")
+
+    vectorstore = Chroma.from_documents(
+        documents=chunks,
+        embedding=embedding_model,
+        persist_directory=persist_directory,
+        collection_metadata={"hnsw:space": "cosine"}
+    )
+
+    print("--- Finished creating vector store ---")
+    print(f"Vector store created and saved to {persist_directory}")
+
+    return vectorstore
+
+
 # Main function to call all subfunctions
 def main():
 
@@ -72,6 +113,8 @@ def main():
     print(f"\nTotal docuemtns loadad : {len(documents)}")
 
     chunks = split_documents(documents)
+
+    vectorstore = create_vector_store(chunks)
 
 
 if __name__ == "__main__":
