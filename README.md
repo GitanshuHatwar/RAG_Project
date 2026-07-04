@@ -76,8 +76,8 @@ flowchart LR
 ## 🧰 Tech Stack
 
 - **Orchestration:** [LangChain](https://docs.langchain.com/oss/python/langchain/rag)
-- **LLM:** *(add your model — e.g. GPT-4o, Claude, Llama 3)*
-- **Vector Store:** *(add yours — e.g. Chroma, FAISS, Pinecone)*
+- **LLM:** *(add your model — e.g. GPT-4o, Genai)*
+- **Vector Store:** *(add yours — e.g. Chroma)*
 - **Language:** Python 3.10+
 
 ---
@@ -89,11 +89,14 @@ flowchart LR
 git clone https://github.com/your-username/multi-source-rag.git
 cd multi-source-rag
 
+# Set up environment
+python -m venv myvenv
+
 # Install dependencies
 pip install -r requirements.txt
 
-# Set up environment variables
-cp .env.example .env
+#Build vector database using
+ingestion_pipline.py
 ```
 
 ### Usage
@@ -111,19 +114,8 @@ print(response.latency)   # retrieval time in ms
 
 ---
 
-## 📊 Performance Snapshot
 
-<div align="center">
 
-| Metric | Sequential Retrieval | Multi-Source (Parallel) |
-|---|---|---|
-| Avg. Retrieval Time | `~1.8s` | `~0.6s` |
-| Answer Consistency | Baseline | ✅ Maintained |
-| Source Coverage | Single | Multi |
-
-*(Replace with your actual benchmark numbers once measured.)*
-
-</div>
 
 ---
 
